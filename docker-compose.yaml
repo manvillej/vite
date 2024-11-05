@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      context: ./frontend/
+      args:
+        - VITE_BACKEND_URL=${VITE_BACKEND_URL}
+    ports:
+      - 8080:8080
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    #volumes:
+    #  - ./frontend/:/usr/src/app
+
+
