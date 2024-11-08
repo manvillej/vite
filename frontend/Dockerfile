@@ -13,13 +13,17 @@ ARG VITE_BACKEND_URL
 ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
 
 COPY package.json .
+COPY entrypoint.sh /entrypoint.sh
 
-RUN npm config set registry http://registry.npmjs.org/ --global
-RUN npm cache clear --force
+RUN chmod +x /entrypoint.sh
 
-RUN npm install --loglevel silly
+RUN /entrypoint.sh
+
+RUN ls
 
 COPY . .
+
+RUN ls
 
 EXPOSE 8080
 
