@@ -13,5 +13,11 @@ export default defineConfig({
   strictPort: true,
   host: true,
   origin: "http://0.0.0.0:8080",
+  proxy: { // https://vite.dev/config/server-options#server-proxy
+    '/api':: {
+        target: 'https://dev242385.service-now.com',
+        changeOrigin: true,
+      },
+  },*/
  },
 });
