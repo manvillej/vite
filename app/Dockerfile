@@ -4,11 +4,7 @@ FROM node
 WORKDIR /usr/src/app
 
 COPY package.json .
-RUN yarn
-#COPY entrypoint.sh /entrypoint.sh
-#RUN chmod +x /entrypoint.sh
-#RUN /entrypoint.sh
-
+RUN yarn install
 COPY . .
 
 EXPOSE 8080
