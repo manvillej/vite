@@ -6,6 +6,9 @@ import {
 import { useState } from 'react'
 import './App.css'
 
+import { apiConfig } from './app.config'
+
+
 const queryClient = new QueryClient()
 
 function App() {
@@ -25,46 +28,25 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <Example />
+      <Incident />
     </QueryClientProvider>
 
   )
 }
 
-function Example() {
-  const { isPending, error, data } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('https://api.github.com/repos/TanStack/query').then((res) =>
-        res.json(),
-      ),
-  })
-
-  if (isPending) return 'Loading...'
-
-  if (error) return 'An error has occurred: ' + error.message
-
-  return (
-    <div>
-      <h1>{data.name}</h1>
-      <p>{data.description}</p>
-      <strong>👀 {data.subscribers_count}</strong>{' '}
-      <strong>✨ {data.stargazers_count}</strong>{' '}
-      <strong>🍴 {data.forks_count}</strong>
-    </div>
-  )
-}
-
-/*function Incident() {
+function Incident() {
   const { isPending, error, data } = useQuery({
     queryKey: ['incident'],
-    queryFn: () -> {
-      fetch('/api/now/table/incident?sysparm_limit=1').then((res) => 
+    queryFn: () =>
+      fetch(
+        '/api/now/table/incident?sysparm_limit=1',
+        {
+          headers: apiConfig.serviceNowHeaders
+        }
+      ).then((res) =>
         res.json(),
       ),
-    }
   })
-  
 
   if (isPending) return 'Loading...'
 
@@ -75,7 +57,7 @@ function Example() {
       <h1>{data.result[0].number}</h1>
     </div>
   )
-}*/
+}
 
 
 export default App

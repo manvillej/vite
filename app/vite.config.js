@@ -14,10 +14,10 @@ export default defineConfig({
   host: true,
   origin: "http://0.0.0.0:8080",
   proxy: { // https://vite.dev/config/server-options#server-proxy
-    '/api':: {
-        target: 'https://dev242385.service-now.com',
+    '/api': {
+        target: process.env.SERVICENOW_HOST,
         changeOrigin: true,
       },
-  },*/
+  },
  },
 });
