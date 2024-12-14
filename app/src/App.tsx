@@ -15,10 +15,11 @@ import { Example } from './Table.tsx';
 
 
 const queryClient = new QueryClient()
+const config = apiConfig()
+
 
 function App() {
   const [count, setCount] = useState(0)
-
   return (
     <>
     
@@ -33,13 +34,14 @@ function App() {
 }
 
 function Incident() {
+  console.log('headers: ' + config)
   const { isPending, error, data } = useQuery({
     queryKey: ['incident'],
     queryFn: () =>
       fetch(
         '/api/now/table/incident?sysparm_limit=1',
         {
-          headers: apiConfig.serviceNowHeaders
+          headers: config.serviceNowHeaders
         }
       ).then((res) =>
         res.json(),

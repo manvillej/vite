@@ -2,9 +2,9 @@
 
 const apiConfig = () => {
   const config = {}
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     config.serviceNowHeaders = new Headers({
-      'Authorization':'Basic ' + btoa(process.env.SERVICENOW_DEVELOPMENT_AUTH),
+      'Authorization':'Basic ' + btoa(import.meta.env.VITE_SERVICENOW_DEVELOPMENT_AUTH),
       'Content-Type':'application/json',
       'Accept':'application/json',
     })
@@ -17,6 +17,5 @@ const apiConfig = () => {
   
   return config
 }
-
 
 export { apiConfig }

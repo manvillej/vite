@@ -2,13 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
 // https://vite.dev/config/
-export default defineConfig({
+const devConfig = {
   plugins: [react()],
   preview: {
     port: 8080,
     strictPort: true,
-   },
-   server: {
+  }, 
+  server: {
     port: 8080,
     strictPort: true,
     host: true,
@@ -19,5 +19,16 @@ export default defineConfig({
           changeOrigin: true,
         },
     },
-   }
+  }
+}
+
+
+export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
+  if (command === 'serve') {
+    return devConfig
+  } else if(command === 'build') {
+    throw new Error("No production config for vite: " + command);
+  } else {
+    throw new Error("unexpected build command from vite: " + command);
+  }
 })
